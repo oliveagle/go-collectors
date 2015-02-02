@@ -1,11 +1,15 @@
 # go-collectors
 metrics collectors written in go
 
-* *nix: ![ci travis][ci_travis]
-* Windows: ![windows test][ci_windows]
+* [Linux][url_travis]: ![ci travis][ci_travis]
+* [Windows][url_ci_win]: ![windows test][ci_windows]  
 
 [ci_travis]: https://travis-ci.org/oliveagle/go-collectors.svg "CI Travis"
 [ci_windows]: https://ci.appveyor.com/api/projects/status/github/oliveagle/go-collectors?branch=master&svg=true "Windows Build"
+
+[url_travis]: https://travis-ci.org/oliveagle/go-collectors "url travis"
+[url_ci_win]: https://ci.appveyor.com/project/oliveagle/go-collectors/build/1.0.20 "url windows ci"
+
 
 ** play at your own risk **
 
