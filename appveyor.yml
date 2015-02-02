@@ -18,7 +18,9 @@ version: 1.0.{build}                 # You can use {branch} to, for example
 branches:
   # whitelist
   only:
-    - master
+    # windows ci is so slow, so test it less frequently with another branch
+    - ci_win
+    # - master
     # - production
 
   # blacklist

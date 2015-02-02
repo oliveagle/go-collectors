@@ -11,3 +11,8 @@ metrics collectors written in go
 
 `go-collectors` is ported from `bosun.org` project, and is focusing on functions to collect metrics only. no saving, no reporting at all. 
 
+
+
+##### WINDOWS CI:
+
+coz windows ci is reletively slow compare to travis, many commits just line up and wait to be tested. so windows ci will only test `ci_win` branch. 
