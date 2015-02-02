@@ -13,7 +13,10 @@ before_install:
 
 install:
     - go get -u github.com/tools/godep
+    - sudo apt-get install tree
 
 script:
    - cd $GOPATH/src/github.com/oliveagle/go-collectors/collectors
+   - pwd
+   - tree -d $GOPATH
    - godep go test .
