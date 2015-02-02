@@ -47,9 +47,6 @@ init:
 # clone directory
 clone_folder: c:\gopath\src\github.com\oliveagle\go-collectors
 
-# # fetch repository as zip archive
-# shallow_clone: true                 # default is "false"
-
 # set clone depth
 clone_depth: 5                      # clone entire repository history if not defined
 
@@ -57,7 +54,6 @@ clone_depth: 5                      # clone entire repository history if not def
 # hosts:
 #   queue-server: 127.0.0.1
 #   db.server.com: 127.0.0.2
-
 
 environment:
   GOPATH: c:\gopath
@@ -70,14 +66,13 @@ install:
   # - choco version
   # - cinst golang -Version 1.4
   # - set GOROOT=c:\tools\go
-  - echo %APPVEYOR_BUILD_FOLDER%
+  # - echo %APPVEYOR_BUILD_FOLDER%
   - go version
   - go env
   # - mkdir c:\gopath
   #- mkdir c:\gopath\src\github.com\oliveagle\go-collectors
   - go get -u github.com/tools/godep
   - git clone https://github.com/bosun-monitor/bosun.git c:\gopath\src\bosun.org
-  #- git clone https://github.com/oliveagle/go-collectors.git c:\gopath\src\github.com\oliveagle\go-collectors
 
 build_script:
 - SET PATH=%GOPATH%\bin;%PATH%
