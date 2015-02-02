@@ -74,6 +74,7 @@ install:
   - go env
   - mkdir c:\gopath
   - go get -u github.com/tools/godep
+  - git clone https://github.com/bosun-monitor/bosun.git c:\gopath\src\bosun.org
 
 build_script:
 - SET PATH=%GOPATH%\bin;%PATH%
