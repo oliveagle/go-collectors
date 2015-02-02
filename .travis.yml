@@ -16,4 +16,5 @@ install:
 
 script:
    - cd $GOPATH/src/github.com/oliveagle/go-collectors/collectors
+   - pwd
    - godep go test .
