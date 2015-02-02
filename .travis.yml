@@ -1,0 +1,19 @@
+language: go
+
+go:
+    - 1.3
+    - tip
+
+before_install:
+    - echo $GOPATH
+    - echo $GOROOT
+    - mkdir -p $GOPATH/src/github.com/oliveagle/go-collectors
+    - git clone https://github.com/oliveagle/go-collectors.git https://github.com/oliveagle/go-collectors.git
+    - git clone https://github.com/bosun-monitor/bosun.git c:\gopath\src\bosun.org
+
+install:
+    - go get -u github.com/tools/godep
+
+script:
+   - cd $GOPATH/src/github.com/oliveagle/go-collectors/collectors
+   - godep go test .
