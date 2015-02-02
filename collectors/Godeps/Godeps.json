@@ -1,0 +1,61 @@
+{
+	"ImportPath": "github.com/oliveagle/go-collectors/collectors",
+	"GoVersion": "go1.3.3",
+	"Deps": [
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/garyburd/redigo/internal",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/garyburd/redigo/redis",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/mjibson/snmp",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/tatsushid/go-fastping",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/golang.org/x/net/icmp",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/golang.org/x/net/internal/iana",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/golang.org/x/net/ipv4",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/golang.org/x/net/ipv6",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/slog",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/util",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/vsphere",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		}
+	]
+}
