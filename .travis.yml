@@ -4,20 +4,16 @@ os: [linux, osx]
 
 osx_image: mavericks
 
-env:
-  global:
-  - GOPATH /gopath
-
 before_install:
     - echo $GOPATH
     - echo $GOROOT
-    - mkdir -p /gopath/src/github.com/oliveagle/go-collectors
-    - git clone https://github.com/oliveagle/go-collectors.git /gopath/src/github.com/oliveagle/go-collectors
-    - git clone https://github.com/bosun-monitor/bosun.git /gopath/src/bosun.org
+    - mkdir -p $GOPATH/src/github.com/oliveagle/go-collectors
+    - git clone https://github.com/oliveagle/go-collectors.git $GOPATH/src/github.com/oliveagle/go-collectors
+    - git clone https://github.com/bosun-monitor/bosun.git $GOPATH/src/bosun.org
 
 install:
     - go get -u github.com/tools/godep
 
 script:
-   - cd /gopath/src/github.com/oliveagle/go-collectors/collectors
+   - cd $GOPATH/src/github.com/oliveagle/go-collectors/collectors
    - godep go test .
