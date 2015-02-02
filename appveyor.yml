@@ -64,11 +64,12 @@ environment:
 
 # scripts that run after cloning repository
 install:
-  - set Path=c:\tools\go\bin;%Path%
-  - echo %PATH%
-  - choco version
-  - cinst golang -Version 1.4
-  - set GOROOT=c:\tools\go
+  # install and use golang 1.4
+  # - set Path=c:\tools\go\bin;%Path%
+  # - echo %PATH%
+  # - choco version
+  # - cinst golang -Version 1.4
+  # - set GOROOT=c:\tools\go
   - go version
   - go env
   - mkdir c:\gopath
