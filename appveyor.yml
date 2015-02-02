@@ -45,7 +45,7 @@ init:
   - git config --global core.autocrlf input
 
 # clone directory
-clone_folder: c:\projects\myproject
+clone_folder: c:\gopath\src\github.com\oliveagle\go-collectors
 
 # # fetch repository as zip archive
 # shallow_clone: true                 # default is "false"
@@ -73,8 +73,10 @@ install:
   - go version
   - go env
   - mkdir c:\gopath
+  #- mkdir c:\gopath\src\github.com\oliveagle\go-collectors
   - go get -u github.com/tools/godep
   - git clone https://github.com/bosun-monitor/bosun.git c:\gopath\src\bosun.org
+  #- git clone https://github.com/oliveagle/go-collectors.git c:\gopath\src\github.com\oliveagle\go-collectors
 
 build_script:
 - SET PATH=%GOPATH%\bin;%PATH%
