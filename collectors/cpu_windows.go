@@ -8,11 +8,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_cpu_windows})
-	collectors = append(collectors, &IntervalCollector{F: c_cpu_info_windows})
-}
-
 func c_cpu_windows() (datapoint.MultiDataPoint, error) {
 	var dst []Win32_PerfRawData_PerfOS_Processor
 	var q = wmi.CreateQuery(&dst, `WHERE Name <> '_Total'`)

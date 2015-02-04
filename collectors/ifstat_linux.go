@@ -4,15 +4,10 @@ import (
 	"regexp"
 	"strings"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_ifstat_linux})
-	collectors = append(collectors, &IntervalCollector{F: c_ipcount_linux})
-}
 
 var netFields = []struct {
 	key  string

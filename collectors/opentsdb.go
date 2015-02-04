@@ -4,14 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	// "bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_opentsdb, Enable: enableURL(tsdbURL)})
-}
 
 const tsdbURL = "http://localhost:4242/api/stats"
 

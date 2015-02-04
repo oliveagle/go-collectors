@@ -7,16 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_iostat_linux})
-	collectors = append(collectors, &IntervalCollector{F: c_dfstat_blocks_linux})
-	collectors = append(collectors, &IntervalCollector{F: c_dfstat_inodes_linux})
-}
 
 var diskLinuxFields = []struct {
 	key  string

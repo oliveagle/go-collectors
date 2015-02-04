@@ -6,10 +6,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_system_windows})
-}
-
 func c_system_windows() (datapoint.MultiDataPoint, error) {
 	var dst []Win32_PerfRawData_PerfOS_System
 	var q = wmi.CreateQuery(&dst, "")

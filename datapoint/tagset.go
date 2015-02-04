@@ -2,11 +2,10 @@ package datapoint
 
 import (
 	"fmt"
-	"math"
-	"math/big"
+
 	"regexp"
 	"sort"
-	"strconv"
+	// "strconv"
 	"strings"
 	"unicode"
 	// "unicode/utf8"
@@ -88,42 +87,6 @@ func (t TagSet) Tags() string {
 	}
 	return b.String()
 }
-
-func (d *DataPoint) clean() error {
-	if err := d.Tags.Clean(); err != nil {
-		return err
-	}
-	m, err := Clean(d.Metric)
-	if err != nil {
-		return fmt.Errorf("cleaning metric %s: %s", d.Metric, err)
-	}
-	if d.Metric != m {
-		d.Metric = m
-	}
-	switch v := d.Value.(type) {
-	case string:
-		if i, err := strconv.ParseInt(v, 10, 64); err == nil {
-			d.Value = i
-		} else if f, err := strconv.ParseFloat(v, 64); err == nil {
-			d.Value = f
-		} else {
-			return fmt.Errorf("Unparseable number %v", v)
-		}
-	case uint64:
-		if v > math.MaxInt64 {
-			d.Value = float64(v)
-		}
-	case *big.Int:
-		if bigMaxInt64.Cmp(v) < 0 {
-			if f, err := strconv.ParseFloat(v.String(), 64); err == nil {
-				d.Value = f
-			}
-		}
-	}
-	return nil
-}
-
-var bigMaxInt64 = big.NewInt(math.MaxInt64)
 
 // Clean removes characters from t that are invalid for OpenTSDB metric and tag
 // values. An error is returned if a resulting tag is empty.

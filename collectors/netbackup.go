@@ -8,15 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_netbackup_jobs})
-	collectors = append(collectors, &IntervalCollector{F: c_netbackup_frequency})
-}
 
 //jobtype
 // 0=backup, 1=archive, 2=restore, 3=verify, 4=duplicate, 5=import, 6=catalog backup, 7=vault, 8=label

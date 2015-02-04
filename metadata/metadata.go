@@ -3,8 +3,9 @@ package metadata
 import (
 	"github.com/oliveagle/go-collectors/datapoint"
 	// "log"
-	"reflect"
+	// "reflect"
 	// "time"
+	// "fmt"
 	"sync"
 )
 
@@ -102,36 +103,37 @@ var (
 
 // AddMeta adds a metadata entry to memory, which is queued for later sending.
 func AddMeta(metric string, tags datapoint.TagSet, name string, value interface{}, setHost bool) {
-	if tags == nil {
-		tags = make(datapoint.TagSet)
-	}
-	if _, present := tags["host"]; setHost && !present {
-		//TODO: tags["host"]
-		// tags["host"] = util.Hostname
-	}
-	if err := tags.Clean(); err != nil {
-		//TODO: slog.Error
-		// slog.Error(err)
-		return
-	}
-	ts := tags.Tags()
-	metalock.Lock()
-	defer metalock.Unlock()
-	prev, present := metadata[Metakey{metric, ts, name}]
-	if present && !reflect.DeepEqual(prev, value) {
-		//TODO: slog.Infof
-		// slog.Infof("metadata changed for %s/%s/%s: %v to %v", metric, ts, name, prev, value)
+	// fmt.Printf("AddMeta: metric: %s, tags: %v, name: %s, value: %v, setHost: %v\n", metric, tags, name, value, setHost)
+	// if tags == nil {
+	// 	tags = make(datapoint.TagSet)
+	// }
+	// if _, present := tags["host"]; setHost && !present {
+	// 	//TODO: tags["host"]
+	// 	// tags["host"] = util.Hostname
+	// }
+	// if err := tags.Clean(); err != nil {
+	// 	//TODO: slog.Error
+	// 	// slog.Error(err)
+	// 	return
+	// }
+	// ts := tags.Tags()
+	// metalock.Lock()
+	// defer metalock.Unlock()
+	// prev, present := metadata[Metakey{metric, ts, name}]
+	// if present && !reflect.DeepEqual(prev, value) {
+	// 	//TODO: slog.Infof
+	// 	// slog.Infof("metadata changed for %s/%s/%s: %v to %v", metric, ts, name, prev, value)
 
-		//TODO: go sendMetadata
-		// go sendMetadata([]Metasend{{
-		// 	Metric: metric,
-		// 	Tags:   tags,
-		// 	Name:   name,
-		// 	Value:  value,
-		// }})
-	} else if metadebug {
-		//TODO slog.Infof
-		// slog.Infof("AddMeta for %s/%s/%s: %v", metric, ts, name, value)
-	}
-	metadata[Metakey{metric, ts, name}] = value
+	// 	//TODO: go sendMetadata
+	// 	// go sendMetadata([]Metasend{{
+	// 	// 	Metric: metric,
+	// 	// 	Tags:   tags,
+	// 	// 	Name:   name,
+	// 	// 	Value:  value,
+	// 	// }})
+	// } else if metadebug {
+	// 	//TODO slog.Infof
+	// 	// slog.Infof("AddMeta for %s/%s/%s: %v", metric, ts, name, value)
+	// }
+	// metadata[Metakey{metric, ts, name}] = value
 }

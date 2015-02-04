@@ -9,10 +9,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_conntrack_linux, Enable: conntrackEnable})
-}
-
 const (
 	conntrackCount = "/proc/sys/net/netfilter/nf_conntrack_count"
 	conntrackMax   = "/proc/sys/net/netfilter/nf_conntrack_max"

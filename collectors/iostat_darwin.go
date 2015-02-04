@@ -2,15 +2,12 @@ package collectors
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
+	"strconv"
+	"strings"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_iostat_darwin})
-}
 
 func c_iostat_darwin() (datapoint.MultiDataPoint, error) {
 	var categories []string
@@ -44,11 +41,16 @@ func c_iostat_darwin() (datapoint.MultiDataPoint, error) {
 				Add(&md, "darwin.cpu.idle", values[i], nil, metadata.Gauge, metadata.Pct, descDarwinCPUIdle)
 				i++
 			} else if cat == "load" {
-				Add(&md, "darwin.loadavg_1_min", values[i], nil, metadata.Unknown, metadata.None, "")
+				load, _ := strconv.ParseFloat(values[i], 64)
+				Add(&md, "darwin.loadavg_1_min", load, nil, metadata.Unknown, metadata.None, "")
 				i++
-				Add(&md, "darwin.loadavg_5_min", values[i], nil, metadata.Unknown, metadata.None, "")
+
+				load, _ = strconv.ParseFloat(values[i], 64)
+				Add(&md, "darwin.loadavg_5_min", load, nil, metadata.Unknown, metadata.None, "")
 				i++
-				Add(&md, "darwin.loadavg_15_min", values[i], nil, metadata.Unknown, metadata.None, "")
+
+				load, _ = strconv.ParseFloat(values[i], 64)
+				Add(&md, "darwin.loadavg_15_min", load, nil, metadata.Unknown, metadata.None, "")
 				i++
 			}
 		}

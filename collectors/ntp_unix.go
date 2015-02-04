@@ -7,14 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_ntp_peers_unix})
-}
 
 var ntpNtpqPeerFields = []string{
 	"remote",

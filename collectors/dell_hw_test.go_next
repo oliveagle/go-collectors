@@ -1,0 +1,61 @@
+package collectors
+
+import (
+	"testing"
+)
+
+func Test_c_omreport_chassis(t *testing.T) {
+	// t.Error("hh")
+}
+
+func Test_c_omreport_system(t *testing.T) {
+}
+
+func Test_c_omreport_storage_enclosure(t *testing.T) {
+
+}
+
+func Test_c_omreport_storage_vdisk(t *testing.T) {
+
+}
+
+func Test_c_omreport_ps(t *testing.T) {
+
+}
+
+func Test_c_omreport_ps_amps(t *testing.T) {
+
+}
+
+func Test_c_omreport_storage_battery(t *testing.T) {
+
+}
+
+func Test_c_omreport_storage_controller(t *testing.T) {
+
+}
+
+// c_omreport_storage_pdisk is called from the controller func, since it needs the encapsulating id.
+func Test_c_omreport_storage_pdisk(t *testing.T) {
+
+}
+
+func Test_c_omreport_processors(t *testing.T) {
+
+}
+
+func Test_c_omreport_fans(t *testing.T) {
+
+}
+
+func Test_c_omreport_memory(t *testing.T) {
+
+}
+
+func Test_c_omreport_temps(t *testing.T) {
+
+}
+
+func Test_c_omreport_volts(t *testing.T) {
+
+}

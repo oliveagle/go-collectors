@@ -9,10 +9,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: puppet_linux, Enable: puppetEnable})
-}
-
 const (
 	puppetPath       = "/var/lib/puppet/"
 	puppetRunSummary = "/var/lib/puppet/state/last_run_summary.yaml"

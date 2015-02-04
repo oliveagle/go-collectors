@@ -11,9 +11,8 @@ import (
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-var collectors []Collector
 
 type Collector interface {
 	Run(chan<- *datapoint.DataPoint)
@@ -96,8 +95,7 @@ func AddTS(md *datapoint.MultiDataPoint, name string, ts int64, value interface{
 		metadata.AddMeta(name, tags, "desc", desc, false)
 	}
 	if host, present := tags["host"]; !present {
-		//TODO: tags["host"]
-		// tags["host"] = util.Hostname
+		tags["host"] = util.Hostname
 	} else if host == "" {
 		delete(tags, "host")
 	}

@@ -4,14 +4,10 @@ import (
 	"strings"
 	"time"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: yum_update_stats_linux, Interval: time.Minute * 30})
-}
 
 func yum_update_stats_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint

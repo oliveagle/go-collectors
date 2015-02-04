@@ -6,11 +6,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_physical_disk_windows})
-	collectors = append(collectors, &IntervalCollector{F: c_diskspace_windows})
-}
-
 const (
 	//Converts 100nS samples to 1S samples
 	winDisk100nS_1S = 10000000

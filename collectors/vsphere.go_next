@@ -7,21 +7,11 @@ import (
 	"io"
 	"strconv"
 
-	"bosun.org/util"
 	"bosun.org/vsphere"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-// Vsphere registers a vSphere collector.
-func Vsphere(user, pwd, host string) {
-	collectors = append(collectors, &IntervalCollector{
-		F: func() (datapoint.MultiDataPoint, error) {
-			return c_vsphere(user, pwd, host)
-		},
-		name: fmt.Sprintf("vsphere-%s", host),
-	})
-}
 
 func c_vsphere(user, pwd, host string) (datapoint.MultiDataPoint, error) {
 	v, err := vsphere.Connect(host, user, pwd)

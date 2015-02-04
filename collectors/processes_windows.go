@@ -10,10 +10,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_windows_processes})
-}
-
 func WatchProcesses(procs []*WatchedProc) error {
 	return fmt.Errorf("process watching not implemented on Darwin")
 }

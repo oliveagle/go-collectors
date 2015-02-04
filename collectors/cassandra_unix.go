@@ -5,14 +5,10 @@ package collectors
 import (
 	"strings"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_nodestats_cfstats_linux})
-}
 
 func c_nodestats_cfstats_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint

@@ -6,28 +6,13 @@ import (
 	"strings"
 	"time"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
 
 func init() {
 	const interval = time.Minute * 5
-	collectors = append(collectors,
-		&IntervalCollector{F: c_omreport_chassis, Interval: interval},
-		&IntervalCollector{F: c_omreport_fans, Interval: interval},
-		&IntervalCollector{F: c_omreport_memory, Interval: interval},
-		&IntervalCollector{F: c_omreport_processors, Interval: interval},
-		&IntervalCollector{F: c_omreport_ps, Interval: interval},
-		&IntervalCollector{F: c_omreport_ps_amps, Interval: interval},
-		&IntervalCollector{F: c_omreport_storage_battery, Interval: interval},
-		&IntervalCollector{F: c_omreport_storage_controller, Interval: interval},
-		&IntervalCollector{F: c_omreport_storage_enclosure, Interval: interval},
-		&IntervalCollector{F: c_omreport_storage_vdisk, Interval: interval},
-		&IntervalCollector{F: c_omreport_system, Interval: interval},
-		&IntervalCollector{F: c_omreport_temps, Interval: interval},
-		&IntervalCollector{F: c_omreport_volts, Interval: interval},
-	)
 }
 
 func c_omreport_chassis() (datapoint.MultiDataPoint, error) {

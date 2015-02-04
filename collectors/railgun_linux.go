@@ -5,16 +5,12 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-	"time"
+	// "time"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_railgun, Enable: enableRailgun, Interval: time.Minute})
-}
 
 var (
 	rgListenRE = regexp.MustCompile(`^stats.listen\s+?=\s+?([0-9.:]+)`)

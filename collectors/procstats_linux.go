@@ -11,10 +11,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_procstats_linux})
-}
-
 var uptimeRE = regexp.MustCompile(`(\S+)\s+(\S+)`)
 var meminfoRE = regexp.MustCompile(`(\w+):\s+(\d+)\s+(\w+)`)
 var vmstatRE = regexp.MustCompile(`(\w+)\s+(\d+)`)

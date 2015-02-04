@@ -14,8 +14,8 @@ func Test_c_conntrack_linux(t *testing.T) {
 		t.Error("md count incorrect")
 	}
 
-	for idx := range md {
-		t.Log(md[idx])
-	}
+	// for idx := range md {
+	// 	t.Log(md[idx])
+	// }
 	// t.Error("hh")
 }

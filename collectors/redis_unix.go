@@ -12,14 +12,10 @@ import (
 
 	"bosun.org/_third_party/github.com/garyburd/redigo/redis"
 
-	"bosun.org/util"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
-
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_redis, init: redisInit})
-}
 
 var redisFields = map[string]bool{
 	"aof_enabled":                  true,

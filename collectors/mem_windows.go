@@ -6,10 +6,6 @@ import (
 	"github.com/oliveagle/go-collectors/metadata"
 )
 
-func init() {
-	collectors = append(collectors, &IntervalCollector{F: c_simple_mem_windows})
-}
-
 // Memory needs to be expanded upon. Should be deeper in utilization (what is
 // cache, etc.) as well as saturation (i.e., paging activity). Lot of that is in
 // Win32_PerfRawData_PerfOS_Memory. Win32_Operating_System's units are KBytes.
