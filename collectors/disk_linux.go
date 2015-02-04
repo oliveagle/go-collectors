@@ -69,6 +69,7 @@ func removable_fs(name string) bool {
 func c_iostat_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var removables []string
+	//Note: Some System don't have /proc/diskstats file at all, travis ci for example.
 	err := readLine("/proc/diskstats", func(s string) error {
 		values := strings.Fields(s)
 		if len(values) < 4 {
