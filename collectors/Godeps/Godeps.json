@@ -3,12 +3,27 @@
 	"GoVersion": "go1.3.3",
 	"Deps": [
 		{
-			"ImportPath": "bosun.org/_third_party/github.com/garyburd/redigo/internal",
+			"ImportPath": "bosun.org/_third_party/code.google.com/p/winsvc/debug",
 			"Comment": "20150112215037-14-g8d43df4",
 			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
 		},
 		{
-			"ImportPath": "bosun.org/_third_party/github.com/garyburd/redigo/redis",
+			"ImportPath": "bosun.org/_third_party/code.google.com/p/winsvc/svc",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/code.google.com/p/winsvc/winapi",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/StackExchange/wmi",
+			"Comment": "20150112215037-14-g8d43df4",
+			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "bosun.org/_third_party/github.com/mattn/go-ole",
 			"Comment": "20150112215037-14-g8d43df4",
 			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
 		},
@@ -21,6 +36,14 @@
 			"ImportPath": "bosun.org/slog",
 			"Comment": "20150112215037-14-g8d43df4",
 			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "github.com/StackExchange/wmi",
+			"Rev": "57958133f8e38a9a4f4ca6060800620608afb4bd"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-ole",
+			"Rev": "188b998b12f63b43afadb28eac05e68083a35019"
 		},
 		{
 			"ImportPath": "github.com/tatsushid/go-fastping",
