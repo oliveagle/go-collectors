@@ -3,3 +3,8 @@ This directory tree is generated automatically by godep.
 Please do not edit.
 
 See https://github.com/tools/godep for more information.
+
+
+coz godep is not arch awared. so windows dependencies have to add into Godeps.json manually.
+
+win_deps.json

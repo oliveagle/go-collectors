@@ -1,0 +1,8 @@
+{
+  "ImportPath": "github.com/StackExchange/wmi",
+  "Rev": "57958133f8e38a9a4f4ca6060800620608afb4bd"
+},
+{
+  "ImportPath": "github.com/mattn/go-ole",
+  "Rev": "188b998b12f63b43afadb28eac05e68083a35019"
+},
