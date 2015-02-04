@@ -10,7 +10,7 @@ func Test_c_iostat_linux(t *testing.T) {
 	// if err != nil {
 	// 	t.Error(err)
 	// }
-	t.Log(len(md))
+	t.Log(len(md), err)
 
 	isOk := false
 	for idx := range md {
