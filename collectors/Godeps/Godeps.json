@@ -18,34 +18,29 @@
 			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
 		},
 		{
-			"ImportPath": "bosun.org/_third_party/github.com/tatsushid/go-fastping",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
-		{
-			"ImportPath": "bosun.org/_third_party/golang.org/x/net/icmp",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
-		{
-			"ImportPath": "bosun.org/_third_party/golang.org/x/net/internal/iana",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
-		{
-			"ImportPath": "bosun.org/_third_party/golang.org/x/net/ipv4",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
-		{
-			"ImportPath": "bosun.org/_third_party/golang.org/x/net/ipv6",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
-		{
 			"ImportPath": "bosun.org/slog",
 			"Comment": "20150112215037-14-g8d43df4",
 			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
+		},
+		{
+			"ImportPath": "github.com/tatsushid/go-fastping",
+			"Rev": "41b7495ae337675151c762cbafafdb846021c34a"
+		},
+		{
+			"ImportPath": "golang.org/x/net/icmp",
+			"Rev": "9818cd45099a766cc1f15374ffbf4a9a422b773f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/internal/iana",
+			"Rev": "9818cd45099a766cc1f15374ffbf4a9a422b773f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/ipv4",
+			"Rev": "9818cd45099a766cc1f15374ffbf4a9a422b773f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/ipv6",
+			"Rev": "9818cd45099a766cc1f15374ffbf4a9a422b773f"
 		}
 	]
 }

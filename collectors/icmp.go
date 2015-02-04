@@ -5,9 +5,9 @@ import (
 	"net"
 	"time"
 
-	"bosun.org/_third_party/github.com/tatsushid/go-fastping"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/tatsushid/go-fastping"
 )
 
 type response struct {
