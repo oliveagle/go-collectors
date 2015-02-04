@@ -2,11 +2,6 @@
 	"ImportPath": "github.com/oliveagle/go-collectors/collectors",
 	"GoVersion": "go1.3.3",
 	"Deps": [
-		{
-			"ImportPath": "bosun.org/slog",
-			"Comment": "20150112215037-14-g8d43df4",
-			"Rev": "8d43df425a7606d94b4e7993b95b68c0375814c6"
-		},
     {
       "ImportPath": "github.com/StackExchange/wmi",
       "Rev": "57958133f8e38a9a4f4ca6060800620608afb4bd"

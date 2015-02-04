@@ -11,8 +11,8 @@ import (
 // "strings"
 // "time"
 
-// "bosun.org/slog"
-// "bosun.org/util"
+// "github.com/oliveagle/go-collectors/slog"
+// "github.com/oliveagle/go-collectors/util"
 // "github.com/oliveagle/go-collectors/datapoint"
 )
 

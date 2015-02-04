@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/StackExchange/wmi"
-	"bosun.org/slog"
+	"github.com/oliveagle/go-collectors/slog"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 )
