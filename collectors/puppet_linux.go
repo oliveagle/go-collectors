@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"bosun.org/_third_party/gopkg.in/yaml.v1"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"gopkg.in/yaml.v1"
 )
 
 const (

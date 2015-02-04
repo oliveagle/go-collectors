@@ -10,8 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"bosun.org/_third_party/github.com/garyburd/redigo/redis"
-
+	"github.com/garyburd/redigo/redis"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/oliveagle/go-collectors/util"

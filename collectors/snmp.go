@@ -5,7 +5,7 @@ import (
 	"io"
 	"math/big"
 
-	"bosun.org/_third_party/github.com/mjibson/snmp"
+	"github.com/mjibson/snmp"
 )
 
 // snmp_subtree takes an oid and returns all data exactly one level below it. It
