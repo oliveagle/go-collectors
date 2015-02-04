@@ -17,6 +17,7 @@ install:
 script:
    #  debug gopath
    - tree -d /home/travis/gopath
+   - tree /proc
    - cd /home/travis/gopath/src/github.com/oliveagle/go-collectors/collectors
    # test script
    - godep go test .
