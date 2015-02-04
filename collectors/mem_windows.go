@@ -1,7 +1,7 @@
 package collectors
 
 import (
-	"bosun.org/_third_party/github.com/StackExchange/wmi"
+	"github.com/StackExchange/wmi"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 )
