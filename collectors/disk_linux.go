@@ -70,7 +70,7 @@ func c_iostat_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var removables []string
 	//Note: Some System don't have /proc/diskstats file at all, travis ci for example.
-	err := readLine("/proc/diskstats", func(s string) error {
+	err := util.ReadLine("/proc/diskstats", func(s string) error {
 		values := strings.Fields(s)
 		if len(values) < 4 {
 			return nil
@@ -142,7 +142,7 @@ func c_dfstat_blocks_linux() (datapoint.MultiDataPoint, error) {
 		fields := strings.Fields(line)
 		// TODO: support mount points with spaces in them. They mess up the field order
 		// currently due to df's columnar output.
-		if len(fields) != 6 || !IsDigit(fields[2]) {
+		if len(fields) != 6 || !util.IsDigit(fields[2]) {
 			return nil
 		}
 		fs := fields[0]
@@ -175,7 +175,7 @@ func c_dfstat_inodes_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	err := util.ReadCommand(func(line string) error {
 		fields := strings.Fields(line)
-		if len(fields) != 6 || !IsDigit(fields[2]) {
+		if len(fields) != 6 || !util.IsDigit(fields[2]) {
 			return nil
 		}
 		mount := fields[5]

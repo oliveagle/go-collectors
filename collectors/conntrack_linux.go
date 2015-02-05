@@ -7,6 +7,7 @@ import (
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
 
 const (
@@ -23,7 +24,7 @@ func conntrackEnable() bool {
 func c_conntrack_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var max, count float64
-	if err := readLine(conntrackCount, func(s string) error {
+	if err := util.ReadLine(conntrackCount, func(s string) error {
 		values := strings.Fields(s)
 		if len(values) > 0 {
 			var err error
@@ -37,7 +38,7 @@ func c_conntrack_linux() (datapoint.MultiDataPoint, error) {
 	}); err != nil {
 		return nil, err
 	}
-	if err := readLine(conntrackMax, func(s string) error {
+	if err := util.ReadLine(conntrackMax, func(s string) error {
 		values := strings.Fields(s)
 		if len(values) > 0 {
 			var err error

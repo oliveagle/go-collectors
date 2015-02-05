@@ -9,6 +9,7 @@ import (
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	"github.com/oliveagle/go-collectors/util"
 )
 
 var uptimeRE = regexp.MustCompile(`(\S+)\s+(\S+)`)
@@ -35,7 +36,7 @@ var CPU_FIELDS = []string{
 func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var Error error
-	if err := readLine("/proc/uptime", func(s string) error {
+	if err := util.ReadLine("/proc/uptime", func(s string) error {
 		m := uptimeRE.FindStringSubmatch(s)
 		if m == nil {
 			return nil
@@ -48,7 +49,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 		Error = err
 	}
 	mem := make(map[string]float64)
-	if err := readLine("/proc/meminfo", func(s string) error {
+	if err := util.ReadLine("/proc/meminfo", func(s string) error {
 		m := meminfoRE.FindStringSubmatch(s)
 		if m == nil {
 			return nil
@@ -69,7 +70,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	if mem["MemTotal"] != 0 {
 		Add(&md, osMemPctFree, (mem["MemFree"]+mem["Buffers"]+mem["Cached"])/mem["MemTotal"]*100, nil, metadata.Gauge, metadata.Pct, osMemFreeDesc)
 	}
-	if err := readLine("/proc/vmstat", func(s string) error {
+	if err := util.ReadLine("/proc/vmstat", func(s string) error {
 		m := vmstatRE.FindStringSubmatch(s)
 		if m == nil {
 			return nil
@@ -103,7 +104,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 		"guest":      "Running a guest vm.",
 		"guest_nice": "Running a niced guest vm.",
 	}
-	if err := readLine("/proc/stat", func(s string) error {
+	if err := util.ReadLine("/proc/stat", func(s string) error {
 		m := statRE.FindStringSubmatch(s)
 		if m == nil {
 			return nil
@@ -165,7 +166,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	if num_cores != 0 && t_util != 0 {
 		Add(&md, osCPU, t_util/float64(num_cores), nil, metadata.Counter, metadata.Pct, "")
 	}
-	if err := readLine("/proc/loadavg", func(s string) error {
+	if err := util.ReadLine("/proc/loadavg", func(s string) error {
 		m := loadavgRE.FindStringSubmatch(s)
 		if m == nil {
 			return nil
@@ -179,7 +180,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	}); err != nil {
 		Error = err
 	}
-	if err := readLine("/proc/sys/kernel/random/entropy_avail", func(s string) error {
+	if err := util.ReadLine("/proc/sys/kernel/random/entropy_avail", func(s string) error {
 		Add(&md, "linux.entropy_avail", strings.TrimSpace(s), nil, metadata.Gauge, metadata.Entropy, "The remaing amount of entropy available to the system. If it is low or hitting zero processes might be blocked waiting for extropy")
 		return nil
 	}); err != nil {
@@ -200,7 +201,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 		"MCP": "Machine Check polls.",
 	}
 	num_cpus := 0
-	if err := readLine("/proc/interrupts", func(s string) error {
+	if err := util.ReadLine("/proc/interrupts", func(s string) error {
 		cols := strings.Fields(s)
 		if num_cpus == 0 {
 			num_cpus = len(cols)
@@ -209,10 +210,10 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 			return nil
 		}
 		irq_type := strings.TrimRight(cols[0], ":")
-		if !IsAlNum(irq_type) {
+		if !util.IsAlNum(irq_type) {
 			return nil
 		}
-		if IsDigit(irq_type) {
+		if util.IsDigit(irq_type) {
 			if cols[len(cols)-2] == "PCI-MSI-edge" && strings.Contains(cols[len(cols)-1], "eth") {
 				irq_type = cols[len(cols)-1]
 			} else {
@@ -221,7 +222,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 			}
 		}
 		for i, val := range cols[1:] {
-			if i >= num_cpus || !IsDigit(val) {
+			if i >= num_cpus || !util.IsDigit(val) {
 				// All values read, remaining cols contain textual description.
 				break
 			}
@@ -231,7 +232,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	}); err != nil {
 		Error = err
 	}
-	if err := readLine("/proc/net/sockstat", func(s string) error {
+	if err := util.ReadLine("/proc/net/sockstat", func(s string) error {
 		cols := strings.Fields(s)
 		switch cols[0] {
 		case "sockets:":
@@ -277,7 +278,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	}
 	ln := 0
 	var headers []string
-	if err := readLine("/proc/net/netstat", func(s string) error {
+	if err := util.ReadLine("/proc/net/netstat", func(s string) error {
 		cols := strings.Fields(s)
 		if ln%2 == 0 {
 			headers = cols
@@ -298,7 +299,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 		Error = err
 	}
 	ln = 0
-	if err := readLine("/proc/net/snmp", func(s string) error {
+	if err := util.ReadLine("/proc/net/snmp", func(s string) error {
 		ln++
 		if ln%2 != 0 {
 			f := strings.Fields(s)
@@ -333,7 +334,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 	for _, fi := range bondDevices {
 		var iface string
 		var slave_count int
-		if err := readLine(bondingPath+"/"+fi.Name(), func(s string) error {
+		if err := util.ReadLine(bondingPath+"/"+fi.Name(), func(s string) error {
 			f := strings.SplitN(s, ":", 2)
 			if len(f) != 2 {
 				return nil
@@ -359,7 +360,7 @@ func c_procstats_linux() (datapoint.MultiDataPoint, error) {
 		Add(&md, "linux.net.bond.slave.count", slave_count, datapoint.TagSet{"bond": fi.Name()}, metadata.Gauge, metadata.Bool, "The number of slaves on the bonded interface.")
 	}
 	// TODO: Bonding monitoring for CentOS 7 using /var/run/teamd/* and teamdctl <team0> state
-	if err := readLine("/proc/sys/fs/file-nr", func(s string) error {
+	if err := util.ReadLine("/proc/sys/fs/file-nr", func(s string) error {
 		f := strings.Fields(s)
 		if len(f) != 3 {
 			return fmt.Errorf("unexpected number of fields")

@@ -1,24 +1,12 @@
 package collectors
 
 import (
-	"bufio"
-	"os"
-	"strings"
-	"sync"
-	"time"
-	"unicode"
-	"unicode/utf8"
-
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/oliveagle/go-collectors/util"
+	"net/http"
+	"time"
 )
-
-type Collector interface {
-	Run(chan<- *datapoint.DataPoint)
-	Name() string
-	Init()
-}
 
 const (
 	osCPU          = "os.cpu"
@@ -60,27 +48,8 @@ var (
 	// specified.
 	DefaultFreq = time.Second * 15
 
-	timestamp = time.Now().Unix()
-	tlock     sync.Mutex
-	AddTags   datapoint.TagSet
+	AddTags datapoint.TagSet
 )
-
-func init() {
-	go func() {
-		for t := range time.Tick(time.Second) {
-			tlock.Lock()
-			timestamp = t.Unix()
-			tlock.Unlock()
-		}
-	}()
-}
-
-func now() (t int64) {
-	tlock.Lock()
-	t = timestamp
-	tlock.Unlock()
-	return
-}
 
 // AddTS is the same as Add but lets you specify the timestamp
 func AddTS(md *datapoint.MultiDataPoint, name string, ts int64, value interface{}, t datapoint.TagSet, rate metadata.RateType, unit metadata.Unit, desc string) {
@@ -114,58 +83,17 @@ func AddTS(md *datapoint.MultiDataPoint, name string, ts int64, value interface{
 // automatically added. If the value of the host key is the empty string, it
 // will be removed (use this to prevent the normal auto-adding of the host tag).
 func Add(md *datapoint.MultiDataPoint, name string, value interface{}, t datapoint.TagSet, rate metadata.RateType, unit metadata.Unit, desc string) {
-	AddTS(md, name, now(), value, t, rate, unit, desc)
+	AddTS(md, name, util.Now(), value, t, rate, unit, desc)
 }
 
-func readLine(fname string, line func(string) error) error {
-	f, err := os.Open(fname)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		if err := line(scanner.Text()); err != nil {
-			return err
-		}
-	}
-	return scanner.Err()
-}
-
-// IsDigit returns true if s consists of decimal digits.
-func IsDigit(s string) bool {
-	r := strings.NewReader(s)
-	for {
-		ch, _, err := r.ReadRune()
-		if ch == 0 || err != nil {
-			break
-		} else if ch == utf8.RuneError {
-			return false
-		} else if !unicode.IsDigit(ch) {
+// TODO: enableURL
+func enableURL(url string) func() bool {
+	return func() bool {
+		resp, err := http.Get(url)
+		if err != nil {
 			return false
 		}
+		resp.Body.Close()
+		return resp.StatusCode == 200
 	}
-	return true
-}
-
-// IsAlNum returns true if s is alphanumeric.
-func IsAlNum(s string) bool {
-	r := strings.NewReader(s)
-	for {
-		ch, _, err := r.ReadRune()
-		if ch == 0 || err != nil {
-			break
-		} else if ch == utf8.RuneError {
-			return false
-		} else if !unicode.IsDigit(ch) && !unicode.IsLetter(ch) {
-			return false
-		}
-	}
-	return true
-}
-
-func TSys100NStoEpoch(nsec uint64) int64 {
-	nsec -= 116444736000000000
-	seconds := nsec / 1e7
-	return int64(seconds)
 }

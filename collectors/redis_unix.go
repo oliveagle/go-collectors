@@ -109,7 +109,7 @@ func redisInit() {
 			if len(cfg) == 0 {
 				return
 			}
-			readLine(cfg, func(cfgline string) error {
+			util.ReadLine(cfg, func(cfgline string) error {
 				result := tcRE.FindStringSubmatch(cfgline)
 				if len(result) > 2 && strings.ToLower(result[0]) == "cluster" {
 					cluster = strings.ToLower(result[1])

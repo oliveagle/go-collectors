@@ -35,7 +35,7 @@ func parseRailURL() string {
 	if config == "" {
 		return config
 	}
-	readLine(config, func(s string) error {
+	util.ReadLine(config, func(s string) error {
 		if m := rgListenRE.FindStringSubmatch(s); len(m) > 0 {
 			url = "http://" + m[1]
 		}
