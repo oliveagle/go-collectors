@@ -23,5 +23,5 @@ func Test_c_cpu_windows(t *testing.T) {
 	}
 
 	// t.Log(collectors)
-	t.Error("hhh")
+	// t.Error("hhh")
 }
