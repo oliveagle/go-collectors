@@ -13,7 +13,7 @@ func Test_c_cpu_windows(t *testing.T) {
 
 	isOsCPUOk := false
 	for idx := range md {
-		// t.Log(md[idx])
+		t.Log(md[idx])
 		if md[idx].Metric == osCPU && md[idx].Value.(uint64) > 0 {
 			isOsCPUOk = true
 		}
@@ -23,5 +23,5 @@ func Test_c_cpu_windows(t *testing.T) {
 	}
 
 	// t.Log(collectors)
-	// t.Error("hhh")
+	t.Error("hhh")
 }
