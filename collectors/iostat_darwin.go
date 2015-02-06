@@ -2,12 +2,17 @@ package collectors
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/oliveagle/go-collectors/util"
-	"strconv"
-	"strings"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_iostat_darwin})
+}
 
 func c_iostat_darwin() (datapoint.MultiDataPoint, error) {
 	var categories []string

@@ -1,13 +1,14 @@
 package collectors
 
 import (
-	// "fmt"
+	"fmt"
 	"net"
 	"time"
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/tatsushid/go-fastping"
+	// "github.com/oliveagle/go-collectors/util"
 )
 
 type response struct {
@@ -16,14 +17,14 @@ type response struct {
 }
 
 // ICMP registers an ICMP collector a given host.
-// func ICMP(host string) {
-// 	collectors = append(collectors, &IntervalCollector{
-// 		F: func() (datapoint.MultiDataPoint, error) {
-// 			return c_icmp(host)
-// 		},
-// 		name: fmt.Sprintf("icmp-%s", host),
-// 	})
-// }
+func ICMP(host string) {
+	collectors = append(collectors, &IntervalCollector{
+		F: func() (datapoint.MultiDataPoint, error) {
+			return c_icmp(host)
+		},
+		name: fmt.Sprintf("icmp-%s", host),
+	})
+}
 
 func c_icmp(host string) (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint

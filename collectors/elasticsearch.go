@@ -7,10 +7,17 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"time"
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_elasticsearch, Enable: enableURL(esURL)})
+	collectors = append(collectors, &IntervalCollector{F: c_elasticsearch_indices, Interval: time.Minute * 2, Enable: enableURL(esURL)})
+}
 
 const esURL = "http://localhost:9200/"
 

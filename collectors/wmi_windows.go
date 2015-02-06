@@ -10,20 +10,20 @@ func queryWmiNamespace(query string, dst interface{}, namespace string) error {
 	return wmi.QueryNamespace(query, dst, namespace)
 }
 
-// func wmiInit(c *IntervalCollector, dst func() interface{}, where string, query *string) func() {
-// 	return func() {
-// 		*query = wmi.CreateQuery(dst(), where)
-// 		c.Enable = func() bool {
-// 			return queryWmi(*query, dst()) == nil
-// 		}
-// 	}
-// }
+func wmiInit(c *IntervalCollector, dst func() interface{}, where string, query *string) func() {
+	return func() {
+		*query = wmi.CreateQuery(dst(), where)
+		c.Enable = func() bool {
+			return queryWmi(*query, dst()) == nil
+		}
+	}
+}
 
-// func wmiInitNamespace(c *IntervalCollector, dst func() interface{}, where string, query *string, namespace string) func() {
-// 	return func() {
-// 		*query = wmi.CreateQuery(dst(), where)
-// 		c.Enable = func() bool {
-// 			return queryWmiNamespace(*query, dst(), namespace) == nil
-// 		}
-// 	}
-// }
+func wmiInitNamespace(c *IntervalCollector, dst func() interface{}, where string, query *string, namespace string) func() {
+	return func() {
+		*query = wmi.CreateQuery(dst(), where)
+		c.Enable = func() bool {
+			return queryWmiNamespace(*query, dst(), namespace) == nil
+		}
+	}
+}

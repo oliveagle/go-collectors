@@ -13,25 +13,27 @@ import (
 	"github.com/oliveagle/go-collectors/slog"
 )
 
-//TODO:
-// func init() {
-// 	c := &IntervalCollector{
-// 		F: c_network_team_windows,
-// 	}
-// 	// Make sure MSFT_NetImPlatAdapter and MSFT_NetAdapterStatisticsSettingData
-// 	// are valid WMI classes when initializing c_network_team_windows
-// 	c.init = func() {
-// 		var dstTeamNic []MSFT_NetLbfoTeamNic
-// 		var dstStats []MSFT_NetAdapterStatisticsSettingData
-// 		queryTeamAdapter = wmi.CreateQuery(&dstTeamNic, "")
-// 		queryTeamStats = wmi.CreateQuery(&dstStats, "")
-// 		c.Enable = func() bool {
-// 			errTeamNic := queryWmiNamespace(queryTeamAdapter, &dstTeamNic, namespaceStandardCimv2)
-// 			errStats := queryWmiNamespace(queryTeamStats, &dstStats, namespaceStandardCimv2)
-// 			return errTeamNic == nil && errStats == nil
-// 		}
-// 	}
-// }
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_network_windows, init: winNetworkInit})
+
+	c := &IntervalCollector{
+		F: c_network_team_windows,
+	}
+	// Make sure MSFT_NetImPlatAdapter and MSFT_NetAdapterStatisticsSettingData
+	// are valid WMI classes when initializing c_network_team_windows
+	c.init = func() {
+		var dstTeamNic []MSFT_NetLbfoTeamNic
+		var dstStats []MSFT_NetAdapterStatisticsSettingData
+		queryTeamAdapter = wmi.CreateQuery(&dstTeamNic, "")
+		queryTeamStats = wmi.CreateQuery(&dstStats, "")
+		c.Enable = func() bool {
+			errTeamNic := queryWmiNamespace(queryTeamAdapter, &dstTeamNic, namespaceStandardCimv2)
+			errStats := queryWmiNamespace(queryTeamStats, &dstStats, namespaceStandardCimv2)
+			return errTeamNic == nil && errStats == nil
+		}
+	}
+	collectors = append(collectors, c)
+}
 
 var (
 	queryTeamStats         string
@@ -181,14 +183,12 @@ type Win32_PerfRawData_Tcpip_NetworkInterface struct {
 func c_network_team_windows() (datapoint.MultiDataPoint, error) {
 	//TODO: minimal supported server: 2012, minimal supported client 2008
 	var dstTeamNic []*MSFT_NetLbfoTeamNic
-	queryTeamAdapter = wmi.CreateQuery(&dstTeamNic, "")
 	err := queryWmiNamespace(queryTeamAdapter, &dstTeamNic, namespaceStandardCimv2)
 	if err != nil {
 		return nil, err
 	}
 
 	var dstStats []MSFT_NetAdapterStatisticsSettingData
-	queryTeamStats = wmi.CreateQuery(&dstStats, "")
 	err = queryWmiNamespace(queryTeamStats, &dstStats, namespaceStandardCimv2)
 	if err != nil {
 		return nil, err

@@ -11,10 +11,15 @@ import (
 	"time"
 
 	"github.com/garyburd/redigo/redis"
+
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_redis, init: redisInit})
+}
 
 var redisFields = map[string]bool{
 	"aof_enabled":                  true,
@@ -109,7 +114,7 @@ func redisInit() {
 			if len(cfg) == 0 {
 				return
 			}
-			util.ReadLine(cfg, func(cfgline string) error {
+			readLine(cfg, func(cfgline string) error {
 				result := tcRE.FindStringSubmatch(cfgline)
 				if len(result) > 2 && strings.ToLower(result[0]) == "cluster" {
 					cluster = strings.ToLower(result[1])
@@ -154,7 +159,7 @@ func redisInit() {
 	}
 	update()
 	go func() {
-		for _ = range time.Tick(time.Minute * 5) {
+		for range time.Tick(time.Minute * 5) {
 			update()
 		}
 	}()

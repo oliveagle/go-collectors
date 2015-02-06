@@ -9,11 +9,15 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_dfstat_darwin})
+}
+
 func c_dfstat_darwin() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	util.ReadCommand(func(line string) error {
 		fields := strings.Fields(line)
-		if line == "" || len(fields) < 9 || !util.IsDigit(fields[2]) {
+		if line == "" || len(fields) < 9 || !IsDigit(fields[2]) {
 			return nil
 		}
 		mount := fields[8]

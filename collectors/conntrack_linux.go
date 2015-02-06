@@ -10,6 +10,10 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_conntrack_linux, Enable: conntrackEnable})
+}
+
 const (
 	conntrackCount = "/proc/sys/net/netfilter/nf_conntrack_count"
 	conntrackMax   = "/proc/sys/net/netfilter/nf_conntrack_max"
@@ -24,7 +28,7 @@ func conntrackEnable() bool {
 func c_conntrack_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var max, count float64
-	if err := util.ReadLine(conntrackCount, func(s string) error {
+	if err := readLine(conntrackCount, func(s string) error {
 		values := strings.Fields(s)
 		if len(values) > 0 {
 			var err error
@@ -38,7 +42,7 @@ func c_conntrack_linux() (datapoint.MultiDataPoint, error) {
 	}); err != nil {
 		return nil, err
 	}
-	if err := util.ReadLine(conntrackMax, func(s string) error {
+	if err := readLine(conntrackMax, func(s string) error {
 		values := strings.Fields(s)
 		if len(values) > 0 {
 			var err error

@@ -10,6 +10,10 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_nodestats_cfstats_linux})
+}
+
 func c_nodestats_cfstats_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var keyspace, table string

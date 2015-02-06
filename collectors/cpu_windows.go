@@ -6,8 +6,14 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
-	"github.com/oliveagle/go-collectors/util"
+
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_cpu_windows})
+	collectors = append(collectors, &IntervalCollector{F: c_cpu_info_windows})
+}
 
 func c_cpu_windows() (datapoint.MultiDataPoint, error) {
 	var dst []Win32_PerfRawData_PerfOS_Processor
@@ -19,7 +25,7 @@ func c_cpu_windows() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var used, num uint64
 	for _, v := range dst {
-		ts := util.TSys100NStoEpoch(v.Timestamp_Sys100NS)
+		ts := TSys100NStoEpoch(v.Timestamp_Sys100NS)
 		num++
 		//Divide by 1e5 because: 1 seconds / 100 Nanoseconds = 1e7. This is the percent time as a decimal, so divide by two less zeros to make it the same as the result * 100.
 		used += (v.PercentUserTime + v.PercentPrivilegedTime + v.PercentInterruptTime) / 1e5

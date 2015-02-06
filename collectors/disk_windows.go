@@ -4,7 +4,13 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_physical_disk_windows})
+	collectors = append(collectors, &IntervalCollector{F: c_diskspace_windows})
+}
 
 const (
 	//Converts 100nS samples to 1S samples

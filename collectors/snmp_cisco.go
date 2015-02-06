@@ -3,7 +3,7 @@ package collectors
 import (
 	"fmt"
 	"math/big"
-	// "time"
+	"time"
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
@@ -15,6 +15,17 @@ const (
 	ciscoMemName = ".1.3.6.1.4.1.9.9.48.1.1.1.2"
 	ciscoMemUsed = ".1.3.6.1.4.1.9.9.48.1.1.1.5"
 )
+
+// SNMPCisco registers a SNMP CISCO collector for the given community and host.
+func SNMPCisco(community, host string) {
+	collectors = append(collectors, &IntervalCollector{
+		F: func() (datapoint.MultiDataPoint, error) {
+			return c_snmp_cisco(community, host)
+		},
+		Interval: time.Second * 30,
+		name:     fmt.Sprintf("snmp-cisco-%s", host),
+	})
+}
 
 func c_snmp_cisco(community, host string) (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint

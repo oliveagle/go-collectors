@@ -5,12 +5,16 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-	// "time"
+	"time"
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_railgun, Enable: enableRailgun, Interval: time.Minute})
+}
 
 var (
 	rgListenRE = regexp.MustCompile(`^stats.listen\s+?=\s+?([0-9.:]+)`)
@@ -35,7 +39,7 @@ func parseRailURL() string {
 	if config == "" {
 		return config
 	}
-	util.ReadLine(config, func(s string) error {
+	readLine(config, func(s string) error {
 		if m := rgListenRE.FindStringSubmatch(s); len(m) > 0 {
 			url = "http://" + m[1]
 		}

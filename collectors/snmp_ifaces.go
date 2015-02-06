@@ -3,9 +3,11 @@ package collectors
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
 
 const (
@@ -25,6 +27,17 @@ const (
 	ifOutDiscards        = ".1.3.6.1.2.1.2.2.1.19"
 	ifOutErrors          = ".1.3.6.1.2.1.2.2.1.20"
 )
+
+// SNMPIfaces registers a SNMP Interfaces collector for the given community and host.
+func SNMPIfaces(community, host string) {
+	collectors = append(collectors, &IntervalCollector{
+		F: func() (datapoint.MultiDataPoint, error) {
+			return c_snmp_ifaces(community, host)
+		},
+		Interval: time.Second * 30,
+		name:     fmt.Sprintf("snmp-ifaces-%s", host),
+	})
+}
 
 func switch_bond(metric, iname string) string {
 	if strings.Contains(iname, "port-channel") {

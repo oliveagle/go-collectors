@@ -10,6 +10,10 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_sntp_windows})
+}
+
 func c_sntp_windows() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	const metric = "sntp."

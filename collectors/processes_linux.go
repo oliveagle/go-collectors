@@ -10,17 +10,18 @@ import (
 
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
 
-// func WatchProcesses(procs []*WatchedProc) error {
-// 	collectors = append(collectors, &IntervalCollector{
-// 		F: func() (datapoint.MultiDataPoint, error) {
-// 			return c_linux_processes(procs)
-// 		},
-// 		name: "c_linux_processes",
-// 	})
-// 	return nil
-// }
+func WatchProcesses(procs []*WatchedProc) error {
+	collectors = append(collectors, &IntervalCollector{
+		F: func() (datapoint.MultiDataPoint, error) {
+			return c_linux_processes(procs)
+		},
+		name: "c_linux_processes",
+	})
+	return nil
+}
 
 func linuxProcMonitor(w *WatchedProc, md *datapoint.MultiDataPoint) error {
 	var err error

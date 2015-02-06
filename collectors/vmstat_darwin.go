@@ -9,6 +9,10 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_vmstat_darwin})
+}
+
 func c_vmstat_darwin() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	var free float64

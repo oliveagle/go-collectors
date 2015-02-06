@@ -7,7 +7,12 @@ import (
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
 	"gopkg.in/yaml.v1"
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: puppet_linux, Enable: puppetEnable})
+}
 
 const (
 	puppetPath       = "/var/lib/puppet/"

@@ -3,6 +3,7 @@ package collectors
 import (
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
 
 func init() {

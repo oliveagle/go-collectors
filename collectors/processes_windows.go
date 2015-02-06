@@ -8,8 +8,12 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
-	"github.com/oliveagle/go-collectors/util"
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_windows_processes})
+}
 
 func WatchProcesses(procs []*WatchedProc) error {
 	return fmt.Errorf("process watching not implemented on Darwin")
@@ -105,7 +109,7 @@ func c_windows_processes() (datapoint.MultiDataPoint, error) {
 		}
 
 		//Use timestamp from WMI to fix issues with CPU metrics
-		ts := util.TSys100NStoEpoch(v.Timestamp_Sys100NS)
+		ts := TSys100NStoEpoch(v.Timestamp_Sys100NS)
 		AddTS(&md, "win.proc.cpu", ts, v.PercentPrivilegedTime/NS100_Seconds/numberOfLogicalProcessors, datapoint.TagSet{"name": name, "id": id, "type": "privileged"}, metadata.Counter, metadata.Pct, descWinProcCPU_priv)
 		AddTS(&md, "win.proc.cpu", ts, v.PercentUserTime/NS100_Seconds/numberOfLogicalProcessors, datapoint.TagSet{"name": name, "id": id, "type": "user"}, metadata.Counter, metadata.Pct, descWinProcCPU_user)
 		AddTS(&md, "win.proc.cpu_total", ts, v.PercentProcessorTime/NS100_Seconds/numberOfLogicalProcessors, datapoint.TagSet{"name": name, "id": id}, metadata.Counter, metadata.Pct, descWinProcCPU_total)

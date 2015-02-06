@@ -9,6 +9,10 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: yum_update_stats_linux, Interval: time.Minute * 30})
+}
+
 func yum_update_stats_linux() (datapoint.MultiDataPoint, error) {
 	var md datapoint.MultiDataPoint
 	regular_c := 0

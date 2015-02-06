@@ -13,6 +13,11 @@ import (
 	"github.com/oliveagle/go-collectors/util"
 )
 
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_netbackup_jobs})
+	collectors = append(collectors, &IntervalCollector{F: c_netbackup_frequency})
+}
+
 //jobtype
 // 0=backup, 1=archive, 2=restore, 3=verify, 4=duplicate, 5=import, 6=catalog backup, 7=vault, 8=label
 // 9=erase, 10=tape request, 11=tape clean, 12=format tape, 13=physical inventory, 14=qualification

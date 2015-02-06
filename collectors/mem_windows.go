@@ -4,7 +4,12 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/oliveagle/go-collectors/datapoint"
 	"github.com/oliveagle/go-collectors/metadata"
+	// "github.com/oliveagle/go-collectors/util"
 )
+
+func init() {
+	collectors = append(collectors, &IntervalCollector{F: c_simple_mem_windows})
+}
 
 // Memory needs to be expanded upon. Should be deeper in utilization (what is
 // cache, etc.) as well as saturation (i.e., paging activity). Lot of that is in
