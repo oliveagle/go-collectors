@@ -159,7 +159,7 @@ func redisInit() {
 	}
 	update()
 	go func() {
-		for range time.Tick(time.Minute * 5) {
+		for _ = range time.Tick(time.Minute * 5) {
 			update()
 		}
 	}()
