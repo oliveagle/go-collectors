@@ -1,5 +1,5 @@
 # go-collectors
-metrics collectors written in go
+metrics collectors written in go. ported from `bosun.org` project.
 
 * [Linux][url_travis]: ![ci travis][ci_travis]
 * [Windows][url_ci_win]: ![windows test][ci_windows]  
