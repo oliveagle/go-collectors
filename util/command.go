@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"time"
 
-	"bosun.org/slog"
+	"github.com/oliveagle/go-collectors/slog"
 )
 
 var (
