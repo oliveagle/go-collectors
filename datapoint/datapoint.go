@@ -6,6 +6,7 @@ import (
 	"math"
 	"math/big"
 	"strconv"
+	"time"
 )
 
 var bigMaxInt64 = big.NewInt(math.MaxInt64)
@@ -13,8 +14,9 @@ var bigMaxInt64 = big.NewInt(math.MaxInt64)
 // DataPoint is a data point for the /api/put route:
 // http://opentsdb.net/docs/build/html/api_http/put.html#example-single-data-point-put.
 type DataPoint struct {
-	Metric    string      `json:"metric"`
-	Timestamp int64       `json:"timestamp"`
+	Metric string `json:"metric"`
+	// Timestamp int64       `json:"timestamp"`
+	Timestamp time.Time   `json:"timestamp"`
 	Value     interface{} `json:"value"`
 	Tags      TagSet      `json:"tags"`
 }
@@ -26,7 +28,7 @@ func (d *DataPoint) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(struct {
 		Metric    string      `json:"metric"`
-		Timestamp int64       `json:"timestamp"`
+		Timestamp time.Time   `json:"timestamp"`
 		Value     interface{} `json:"value"`
 		Tags      TagSet      `json:"tags"`
 	}{
