@@ -23,3 +23,4 @@ After encountered the `segmentation fault`, I tried a lot of ways to fix it:
 * tried to use signal in c to catch SIGSEGV,SIGABRT, SIGILL, ... but bug remains. 
 * accidentially upgraded `go1.3rc2` to `go1.4.2`, bug fixed!
 
+`try_pdh` contains demos to embed c and c++ into go!
